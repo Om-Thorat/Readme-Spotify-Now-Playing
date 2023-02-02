@@ -1,6 +1,6 @@
 # SVG Spotify widget 🎶
 
-![](https://notom.deta.dev/spotify)
+![spotify](https://notom.deta.dev/spotify)
 
 ## Set up 👀
 
