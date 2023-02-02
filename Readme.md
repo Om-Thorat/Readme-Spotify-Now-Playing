@@ -42,7 +42,7 @@ Now paste the Credentials you copied into their respective places in your main.p
 
 Now run the Main.py file and visit `localhost:5000` click on sign in and **voila!** you have your own svg spotify widget.
 
-You can now host it anywhere you wish Deploy it to [deta]("https://deta.sh") or [Vercel]("https://vercel.com)
+You can now host it anywhere you wish Deploy it to [deta](https://deta.sh) or [Vercel](https://vercel.com)
 
 To use it in your readme's just link to your hosting url /spotify  
 for example:
