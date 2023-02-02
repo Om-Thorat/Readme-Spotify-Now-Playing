@@ -57,6 +57,7 @@ def index():
         print("Access token available! Trying to get user information...")
         sp = spotipy.Spotify(access_token)
         results = sp.current_user()
+        username = results['id']
         return redirect("/spotify?")
 
     else:
