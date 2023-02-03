@@ -1,6 +1,6 @@
 # SVG Spotify widget 🎶
 
-![If you see this try reloading the page!](https://notom.deta.dev/spotify)
+![If you see this try reloading the page!](https://notom.vercel.app/spotify)
 
 ## Set up 👀
 
