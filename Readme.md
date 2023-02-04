@@ -43,6 +43,9 @@ Now run the Main.py file and visit `localhost:5000` click on sign in and **voila
 
 You can now host it anywhere you wish Deploy it to [deta](https://deta.sh) or [Vercel](https://vercel.com)
 
+### Vercel  
+!! Rememeber to change the paths in `main.py` to just `/tmp` instead of `{cwd}/tmp`.
+
 To use it in your readme's just link to your hosting url /spotify  
 for example:
 ```![](https://{yoururl}.vercel.app/spotify)```
