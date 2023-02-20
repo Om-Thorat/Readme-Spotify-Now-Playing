@@ -31,7 +31,7 @@
 
 * Install the dependencies
 
-```pip3 install -r requirements.txt```
+```pip install requirements.txt```
 
 * Make a tmp directory 
 

@@ -12,14 +12,14 @@ from spotipy import oauth2
 
 cwd = Path.cwd()
 cwd = re.sub(r"\\",r"/",str(cwd))
-CLIENT_ID = 'XXXX'
-CLIENT_SECRET = 'XXXX'
-username = "XXXX"
+CLIENT_ID = '158cedd879f640449cdbd6ec01d2add9'
+CLIENT_SECRET = 'f440b27991d64432a1a0f9026f509ff8'
+username = "spyrax"
 scope = "user-read-playback-state user-read-recently-played"
-redirect_uri = "http://127.0.0.1:5000/"
+redirect_uri = "http://localhost/callback"
 
 app = Flask(__name__)
-sp_oauth = oauth2.SpotifyOAuth( CLIENT_ID, CLIENT_SECRET,redirect_uri,scope=scope,cache_path=f"{cwd}/tmp/token.txt")
+sp_oauth = oauth2.SpotifyOAuth( CLIENT_ID, CLIENT_SECRET,redirect_uri,scope=scope,cache_path=f"/tmp/token.txt")
 
 def spotify():
     token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"{cwd}/tmp/token.txt")
