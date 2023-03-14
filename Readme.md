@@ -11,15 +11,14 @@
 
 * Fill out the name and the Description and click create.
 
-* Click Edit Settings and add `http://127.0.0.1:5000` to the redirect URIs  
+* Click Edit Settings and add `http://127.0.0.1:5000/spotify` to the redirect URIs  
 (P.s don't forget to scroll down and click save)
-
-![](./assets/redirecturi.png)
 
 * Now Copy the Client ID and The Client Secret
 
 ![](./assets/creds.png)
 
+* Fork this Repo
 
 * Clone the Github Repo
 
@@ -31,7 +30,7 @@
 
 * Install the dependencies
 
-```pip3 install -r requirements.txt```
+```pip install -r requirements.txt```
 
 * Make a tmp directory 
 
@@ -39,17 +38,28 @@
 
 * Now paste the Credentials you copied into their respective places in your main.py file
 
-Now run the Main.py file and visit `localhost:5000` click on sign in and **voila!** you have your own svg spotify widget 🎉
+( ⚠️ make sure not to commit this repo with this sensitive info)
 
-You can now host it anywhere you wish Deploy it to [deta](https://deta.sh) or [Vercel](https://vercel.com)
+* Run the script and a token.json file is created Copy the "refresh_token" from the file.
 
-### Vercel  
-!! Rememeber to change the paths in `main.py` to just `/tmp` instead of `{cwd}/tmp`.
+### Now that we have all our ids secrets and tokens let's create the app 👀
+
+* Create a new vercel app with the repo your forked linked to it.
+
+* Add the following environment variables while creating the app 
+> don't worry if you forget you can always edit them in settings > Environment variables
+
+* CLIENT_ID = client id copied from spotify dashboard  
+* CLIENT_SECRET = client secret copied from spotify dashboard
+* REFRESH = refresh token copied from json file
+
+Click save and **voila!** you have your own svg spotify widget 🎉
+
+Visit ```{yoururl}.vercel.app/spotify``` to see 👀
 
 To use it in your readme's just link to your hosting url /spotify  
 for example:
 ```![](https://{yoururl}.vercel.app/spotify)```
-similarly ```![](https://{yoururl}.deta.dev/spotify)```
 
 Thanks,
 💖 Happy Coding.
