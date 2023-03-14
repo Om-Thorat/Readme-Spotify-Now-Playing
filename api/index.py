@@ -15,15 +15,29 @@ cwd = Path.cwd()
 cwd = re.sub(r"\\",r"/",str(cwd))
 CLIENT_ID = os.environ['CLIENT_ID']
 CLIENT_SECRET = os.environ['CLIENT_SECRET']
-try:
-    username = os.environ['username']
-except:
-    username = ""
 scope = "user-read-playback-state user-read-recently-played"
 redirect_uri = "http://127.0.0.1:5000/spotify"
 
 app = Flask(__name__)
-token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"{cwd}/tmp/token")
+try:
+    Refresh = os.environ['REFRESH']
+    data = {
+        "grant_type": "refresh_token",
+        "refresh_token": Refresh,
+        }
+
+    res = requests.post(
+        "https://accounts.spotify.com/api/token",
+        data={
+            "grant_type": "refresh_token",
+            "refresh_token": Refresh,
+            "client_id": CLIENT_ID,
+            "client_secret": CLIENT_SECRET,
+        },
+    )
+    token = res.json()['access_token']
+except:
+    token = util.prompt_for_user_token("",scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"{cwd}/tmp/token.json")
 sp = spotipy.Spotify(auth=token)
 def spotify():
     try:
@@ -38,6 +52,10 @@ def spotify():
         artist = (current['items'][0]['track']['artists'][0]['name'])
         cover = (current['items'][0]['track']['album']['images'][0]['url'])
         return ["last played",songname,cover,artist]
+    
+@app.route('/')
+def hi():
+     return "Um?"
 
 @app.route('/spotify')
 def cool():
@@ -47,8 +65,8 @@ def cool():
         artist = info[3].replace("&","&amp;")
         response = requests.get(info[2])
         img = Image.open(BytesIO(response.content))
-        img.save(f"{cwd}/tmp/haha",format="JPEG")
-        with open(f"{cwd}/tmp/haha","rb") as img_file:
+        img.save(f"{cwd}/tmp/haha.jpg",format="JPEG")
+        with open(f"{cwd}/tmp/haha.jpg","rb") as img_file:
             imgstr = base64.b64encode(img_file.read()).decode()
         bars = ""
         for i in range(0,32):
