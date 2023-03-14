@@ -96,4 +96,4 @@ def cool():
         resp.headers['Cache-Control'] = 'public, max-age=0, must-revalidate'
         return resp
 
-app.run(debug=True)
+# app.run(debug=True)
