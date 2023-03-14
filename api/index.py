@@ -37,7 +37,7 @@ try:
     )
     token = res.json()['access_token']
 except:
-    token = util.prompt_for_user_token("",scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"{cwd}/tmp/token.json")
+    token = util.prompt_for_user_token("",scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"token.json")
 sp = spotipy.Spotify(auth=token)
 def spotify():
     try:
@@ -65,8 +65,8 @@ def cool():
         artist = info[3].replace("&","&amp;")
         response = requests.get(info[2])
         img = Image.open(BytesIO(response.content))
-        img.save(f"{cwd}/tmp/haha.jpg",format="JPEG")
-        with open(f"{cwd}/tmp/haha.jpg","rb") as img_file:
+        img.save(f"/tmp/haha.jpg",format="JPEG")
+        with open(f"/tmp/haha.jpg","rb") as img_file:
             imgstr = base64.b64encode(img_file.read()).decode()
         bars = ""
         for i in range(0,32):
