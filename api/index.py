@@ -20,14 +20,12 @@ try:
 except:
     username = ""
 scope = "user-read-playback-state user-read-recently-played"
-redirect_uri = "http://127.0.0.1:5000/"
+redirect_uri = "http://127.0.0.1:5000/spotify"
 
 app = Flask(__name__)
-sp_oauth = oauth2.SpotifyOAuth( CLIENT_ID, CLIENT_SECRET,redirect_uri,scope=scope,cache_path=f"{cwd}/tmp/token.txt")
-
+token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"{cwd}/tmp/token")
+sp = spotipy.Spotify(auth=token)
 def spotify():
-    token = util.prompt_for_user_token(username, scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"{cwd}/tmp/token.txt")
-    sp = spotipy.Spotify(auth=token)
     try:
         current = (sp.current_playback())
         songname = (current['item']['name'])
@@ -40,35 +38,6 @@ def spotify():
         artist = (current['items'][0]['track']['artists'][0]['name'])
         cover = (current['items'][0]['track']['album']['images'][0]['url'])
         return ["last played",songname,cover,artist]
-
-
-@app.route('/')
-def index(): 
-    access_token = ""
-
-    token_info = sp_oauth.get_cached_token()
-
-    if token_info:
-        access_token = token_info['access_token']
-    else:
-        url = request.url
-        code = sp_oauth.parse_response_code(url)
-        if code != url:
-            token_info = sp_oauth.get_access_token(code)
-            access_token = token_info['access_token']
-
-    if access_token:
-        print("Access token available! Trying to get user information...")
-        sp = spotipy.Spotify(access_token)
-        results = sp.current_user()
-        username = results['id']
-        return redirect("/spotify?")
-
-    else:
-        auth_url = sp_oauth.get_authorize_url()
-        htmlLoginButton = "<a href='" + auth_url + "'>Login to Spotify</a>"
-        return htmlLoginButton
-
 
 @app.route('/spotify')
 def cool():
@@ -95,5 +64,6 @@ def cool():
         resp = Response(aight,mimetype='image/svg+xml')
         resp.headers['Cache-Control'] = 'public, max-age=0, must-revalidate'
         return resp
+
 
 # app.run(debug=True)
