@@ -9,12 +9,16 @@ import requests
 from io import BytesIO
 import random
 from spotipy import oauth2
+import os
 
 cwd = Path.cwd()
 cwd = re.sub(r"\\",r"/",str(cwd))
-CLIENT_ID = 'XXXX'
-CLIENT_SECRET = 'XXXX'
-username = "XXXX"
+CLIENT_ID = os.environ['CLIENT_ID']
+CLIENT_SECRET = os.environ['CLIENT_SECRET']
+try:
+    username = os.environ['username']
+except:
+    username = ""
 scope = "user-read-playback-state user-read-recently-played"
 redirect_uri = "http://127.0.0.1:5000/"
 
