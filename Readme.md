@@ -36,7 +36,7 @@
 
 ```mkdir tmp```
 
-* Now paste the Credentials you copied into their respective places in your main.py file
+* Now paste the Credentials you copied into their respective places in your index.py file located at `/api/index.py`
 
 ( ⚠️ make sure not to commit this repo with this sensitive info)
 
