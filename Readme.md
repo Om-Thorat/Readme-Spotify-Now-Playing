@@ -32,30 +32,19 @@
 
 ```pip install -r requirements.txt```
 
-* Now paste the Credentials you copied into their respective places in your index.py file located at `/api/index.py`
+* Now paste the Credentials you copied into their respective places in your index.py file located at `/api/main.py`
 
 ( ⚠️ make sure not to commit this repo with this sensitive info)
 
-* Run the script and a token.json file is created Copy the "refresh_token" from the file.
-
-### Now that we have all our ids secrets and tokens let's create the app 👀
-
-* Create a new vercel app with the repo your forked linked to it.
-
-* Add the following environment variables while creating the app 
-> don't worry if you forget you can always edit them in settings > Environment variables
-
-* CLIENT_ID = client id copied from spotify dashboard  
-* CLIENT_SECRET = client secret copied from spotify dashboard
-* REFRESH = refresh token copied from json file
-
 Click save and **voila!** you have your own svg spotify widget 🎉
+As long as the flask app is running it will work on your computer.
 
-Visit ```{yoururl}.vercel.app/spotify``` to see 👀
+You can also deploy to Vercel just make sure to add the Vercel link to your Spotify Redirect URI's
 
-To use it in your readme's just link to your hosting url /spotify  
-for example:
-```![](https://{yoururl}.vercel.app/spotify)```
+To use it in your readme's just link to your hosting url /spotify.
 
 Thanks,
 💖 Happy Coding.
+
+## Contributions
+Thanks to [AaronGearheart](https://github.com/AaronGearheart) for
