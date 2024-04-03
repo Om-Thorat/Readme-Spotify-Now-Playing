@@ -64,10 +64,7 @@ def cool():
         songname = info[1].replace("&","&amp;")
         artist = info[3].replace("&","&amp;")
         response = requests.get(info[2])
-        img = Image.open(BytesIO(response.content))
-        img.save(f"/tmp/haha.jpg",format="JPEG")
-        with open(f"/tmp/haha.jpg","rb") as img_file:
-            imgstr = base64.b64encode(img_file.read()).decode()
+        imgstr = base64.b64encode(response.content).decode()
         bars = ""
         for i in range(0,32):
             bars = bars + (f'<div class="bar" style="animation-delay: {random.randint(500,800)}ms; animation-duration: {random.randint(800,1000)}ms"></div>')

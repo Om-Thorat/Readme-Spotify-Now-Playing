@@ -32,10 +32,6 @@
 
 ```pip install -r requirements.txt```
 
-* Make a tmp directory 
-
-```mkdir tmp```
-
 * Now paste the Credentials you copied into their respective places in your index.py file located at `/api/index.py`
 
 ( ⚠️ make sure not to commit this repo with this sensitive info)
