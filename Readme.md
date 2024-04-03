@@ -2,7 +2,7 @@
 
 ![If you see this try reloading the page!](https://notom.vercel.app/spotify)
 
-## Set up 👀
+## Set up
 
 * You will need to make a Spotify Application first To do so visit [Spotify Developer portal](https://developer.spotify.com/dashboard/applications)  
 * Login and then hit create App
@@ -12,7 +12,7 @@
 * Fill out the name and the Description and click create.
 
 * Click Edit Settings and add `http://127.0.0.1:5000/spotify` to the redirect URIs  
-(P.s don't forget to scroll down and click save)
+**(don't forget to scroll down and click save)**
 
 * Now Copy the Client ID and The Client Secret
 
@@ -47,4 +47,4 @@ Thanks,
 💖 Happy Coding.
 
 ## Contributions
-Thanks to [AaronGearheart](https://github.com/AaronGearheart) for
+Thanks to [AaronGearheart](https://github.com/AaronGearheart) for contributions to the project such as the authorized and index HTML files, and changes to the main.py script!
