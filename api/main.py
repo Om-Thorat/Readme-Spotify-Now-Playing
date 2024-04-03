@@ -1,45 +1,25 @@
-from flask import Flask,Response,request,redirect,render_template
+# Contributions From Aaron Gearheart
+
+from flask import Flask, Response, render_template, redirect
 import spotipy
 from spotipy import util
-from pathlib import Path
-import re
 import base64
-from PIL import Image
 import requests
-from io import BytesIO
 import random
-from spotipy import oauth2
-import os
 
-cwd = Path.cwd()
-cwd = re.sub(r"\\",r"/",str(cwd))
-CLIENT_ID = os.environ['CLIENT_ID']
-CLIENT_SECRET = os.environ['CLIENT_SECRET']
+CLIENT_ID = "YOUR_SPOTIFY_TOKEN"
+CLIENT_SECRET = "YOUR_SPOTIFY_SECRET"
+
 scope = "user-read-playback-state user-read-recently-played"
 redirect_uri = "http://127.0.0.1:5000/spotify"
 
 app = Flask(__name__)
-try:
-    Refresh = os.environ['REFRESH']
-    data = {
-        "grant_type": "refresh_token",
-        "refresh_token": Refresh,
-        }
 
-    res = requests.post(
-        "https://accounts.spotify.com/api/token",
-        data={
-            "grant_type": "refresh_token",
-            "refresh_token": Refresh,
-            "client_id": CLIENT_ID,
-            "client_secret": CLIENT_SECRET,
-        },
-    )
-    token = res.json()['access_token']
-except:
-    token = util.prompt_for_user_token("",scope, CLIENT_ID, CLIENT_SECRET, redirect_uri,cache_path=f"token.json")
+token = util.prompt_for_user_token("", scope, CLIENT_ID, CLIENT_SECRET, redirect_uri)
+print(token)
 sp = spotipy.Spotify(auth=token)
-def spotify():
+
+def get_info():
     try:
         current = (sp.current_playback())
         songname = (current['item']['name'])
@@ -51,15 +31,21 @@ def spotify():
         songname = (current['items'][0]['track']['name'])
         artist = (current['items'][0]['track']['artists'][0]['name'])
         cover = (current['items'][0]['track']['album']['images'][0]['url'])
-        return ["last played",songname,cover,artist]
+        return ["Last Played",songname,cover,artist]
     
-@app.route('/')
-def hi():
-     return "Um?"
+@app.route('/authorize')
+def authorize():
+    global token
+    token = util.prompt_for_user_token("", scope, CLIENT_ID, CLIENT_SECRET, redirect_uri)
+    return redirect("/authorized")
+
+@app.route('/authorized')
+def authorized():
+    return render_template('authorized.html')
 
 @app.route('/spotify')
-def cool():
-        info = spotify()
+def create_image():
+        info = get_info()
         print(info)
         songname = info[1].replace("&","&amp;")
         artist = info[3].replace("&","&amp;")
@@ -76,9 +62,12 @@ def cool():
             "bars":bars
         }
         aight = render_template("card.html.j2",**data)
-        resp = Response(aight,mimetype='image/svg+xml')
-        resp.headers['Cache-Control'] = 'public, max-age=0, must-revalidate'
-        return resp
+        response = Response(aight,mimetype='image/svg+xml')
+        response.headers['Cache-Control'] = 'public, max-age=0, must-revalidate'
+        return response
 
+@app.route('/')
+def render_homepage():
+    return render_template('index.html')
 
-# app.run(debug=True)
+app.run(debug=True)

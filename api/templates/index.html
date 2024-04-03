@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com"   crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <style>
+    * {
+      font-family: "Poppins", sans-serif;
+      font-style: normal;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+    }
+
+    button {
+      padding: 15px 30px;
+      background-color: #1DB954;
+      color: black;
+      border: none;
+      border-radius: 100px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <button onclick="authorize()">Authorize</button>
+
+  <script>
+    function authorize() {
+      window.location.href = window.location.href + 'authorize';
+    }
+  </script>
+</body>
+</html>
